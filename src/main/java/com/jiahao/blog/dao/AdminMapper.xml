@@ -68,4 +68,7 @@
       admin_password = #{adminPassword,jdbcType=VARCHAR}
     where admin_id = #{adminId,jdbcType=INTEGER}
   </update>
+  <select id="selectByCodeAndPassword" resultType="Admin">
+    select * from admin where admin_code = #{adminCode} and admin_password = #{adminPassword}
+  </select>
 </mapper>
