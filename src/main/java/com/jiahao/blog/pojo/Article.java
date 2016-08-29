@@ -17,6 +17,14 @@ public class Article {
 
     private Integer tagId;
 
+    private Integer readCount;
+
+    private Integer commentCount;
+
+    private Integer commentAuth;
+
+    private Integer isDel;
+
     public Integer getId() {
         return id;
     }
@@ -71,5 +79,37 @@ public class Article {
 
     public void setTagId(Integer tagId) {
         this.tagId = tagId;
+    }
+
+    public Integer getReadCount() {
+        return readCount;
+    }
+
+    public void setReadCount(Integer readCount) {
+        this.readCount = readCount;
+    }
+
+    public Integer getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(Integer commentCount) {
+        this.commentCount = commentCount;
+    }
+
+    public Integer getCommentAuth() {
+        return commentAuth;
+    }
+
+    public void setCommentAuth(Integer commentAuth) {
+        this.commentAuth = commentAuth;
+    }
+
+    public Integer getIsDel() {
+        return isDel;
+    }
+
+    public void setIsDel(Integer isDel) {
+        this.isDel = isDel;
     }
 }
