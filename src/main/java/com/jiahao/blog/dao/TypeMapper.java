@@ -2,6 +2,8 @@ package com.jiahao.blog.dao;
 
 import com.jiahao.blog.pojo.Type;
 
+import java.util.List;
+
 public interface TypeMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,6 @@ public interface TypeMapper {
     int updateByPrimaryKeySelective(Type record);
 
     int updateByPrimaryKey(Type record);
+
+    List<Type> selectList();
 }

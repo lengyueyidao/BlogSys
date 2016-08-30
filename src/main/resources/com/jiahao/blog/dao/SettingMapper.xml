@@ -79,4 +79,10 @@
       page_count = #{pageCount,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectSetting" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from setting limit 0,1
+  </select>
 </mapper>

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -17,6 +18,26 @@
     <link href="${pageContext.request.contextPath}/assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
 
 </head>
+<script type="text/javascript">
+    function edit(id, name) {
+
+        <c:forEach items="${typeList}" var="type">
+            if(id != '<c:out value="${type.id}"/>') {
+                var tdName = document.getElementById("td${type.id}");
+                tdName.innerHTML = '${type.typeName}';
+            }
+        </c:forEach>
+        var tdName = document.getElementById("td" + id);
+        tdName.innerHTML = "<form action='type/update' method='post'>" + "<input type='hidden' name='id' value='" + id + "'/>" + "<input  id='n' type='text' name='typeName' value='" + name　+"'/>" + "<input class='btn btn-default btn-sm' type='submit' value='保存'/><input type='button' class='btn btn-default btn-sm' onclick='lost(\"" + id + "\", \"" + name +"\")' value='取消'/></form>";
+        document.getElementById("n").focus();
+    }
+
+    function lost(id, name) {
+
+        var tdName = document.getElementById("td" + id);
+        tdName.innerHTML = name;
+    }
+</script>
 <body>
     <div id="wrapper">
         <nav class="navbar navbar-default top-navbar" role="navigation">
@@ -249,13 +270,13 @@
                         <a href="admin_article.jsp"><i class="glyphicon glyphicon-book"></i> <strong>文章管理</strong></a>
                     </li>
                     <li>
-                        <a href="admin_type.jsp" class="active-menu"><i class="glyphicon glyphicon-bookmark"></i> <strong>类别管理</strong></a>
+                        <a href="type" class="active-menu"><i class="glyphicon glyphicon-bookmark"></i> <strong>类别管理</strong></a>
                     </li>
 					<li>
                         <a href="admin_comment.jsp"><i class="glyphicon glyphicon-comment"></i> <strong>评论管理</strong></a>
                     </li>
                     <li>
-                        <a href="admin_setting.jsp"><i class="glyphicon glyphicon-cog"></i> <strong>博客配置</strong></a>
+                        <a href="setting"><i class="glyphicon glyphicon-cog"></i> <strong>博客配置</strong></a>
                     </li>
                     <li>
                         <a href="admin_drafts.jsp"><i class="glyphicon glyphicon-folder-open"></i> <strong>草稿箱</strong></a>
@@ -272,13 +293,15 @@
         <div id="page-wrapper" >
             <div id="page-inner">
 				<div class="row">
-					<div class="col-lg-4"> 
+					<div class="col-lg-4">
+                        <form role="form" method="post" action="type/add">
 						<div class="input-group"> 
-							<input type="text" class="form-control"> 
+							<input type="text" class="form-control" name="typeName">
 							<span class="input-group-btn"> 
-								<button class="btn btn-primary" type="button">添加分类</button> 
+								<input class="btn btn-primary" type="submit" value="添加分类"/>
 							</span> 
-						</div><!-- /input-group --> 
+						</div><!-- /input-group -->
+                        </form>
 					</div>
 				
                 </div> 
@@ -302,31 +325,14 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-											<td>Java</td>
-											<td style="text-align:center;">23</td>
-											<td style="text-align:center;">编辑|删除</td>
-										</tr>
-										<tr>
-											<td>C#</td>
-											<td style="text-align:center;">13</td>
-											<td style="text-align:center;">编辑|删除</td>
-										</tr>
-										<tr>
-											<td>Lua</td>
-											<td style="text-align:center;">1</td>
-											<td style="text-align:center;">编辑|删除</td>
-										</tr>
-										<tr>
-											<td>Mysql</td>
-											<td style="text-align:center;">3</td>
-											<td style="text-align:center;">编辑|删除</td>
-										</tr>
-										<tr>
-											<td>IOS</td>
-											<td style="text-align:center;">13</td>
-											<td style="text-align:center;">编辑|删除</td>
-										</tr>
+                                        <c:forEach items="${typeList}" var="type">
+                                            <tr>
+                                                <td id="td${type.id}"><c:out value="${type.typeName}"/></td>
+                                                <td style="text-align:center;">12</td>
+                                                <td style="text-align:center;"><a href="#" onclick="edit('${type.id}','${type.typeName}')">编辑</a>|<a href="type/delete?id=${type.id}">删除</a></td>
+                                            </tr>
+                                        </c:forEach>
+
                                     </tbody>
                                 </table>
                             </div>

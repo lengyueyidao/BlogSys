@@ -17,6 +17,7 @@
    <!-- TABLE STYLES-->
 
 </head>
+
 <body>
     <div id="wrapper">
         <nav class="navbar navbar-default top-navbar" role="navigation">
@@ -249,13 +250,13 @@
                         <a href="admin_article.jsp"><i class="glyphicon glyphicon-book"></i> <strong>文章管理</strong></a>
                     </li>
                     <li>
-                        <a href="admin_type.jsp"><i class="glyphicon glyphicon-bookmark"></i> <strong>类别管理</strong></a>
+                        <a href="type"><i class="glyphicon glyphicon-bookmark"></i> <strong>类别管理</strong></a>
                     </li>
 					<li>
                         <a href="admin_comment.jsp"><i class="glyphicon glyphicon-comment"></i> <strong>评论管理</strong></a>
                     </li>
                     <li>
-                        <a href="admin_setting.jsp" class="active-menu"><i class="glyphicon glyphicon-cog"></i> <strong>博客配置</strong></a>
+                        <a href="setting" class="active-menu"><i class="glyphicon glyphicon-cog"></i> <strong>博客配置</strong></a>
                     </li>
                     <li>
                         <a href="admin_drafts.jsp"><i class="glyphicon glyphicon-folder-open"></i> <strong>草稿箱</strong></a>
@@ -280,26 +281,27 @@
 							<div class="panel-body">
 								<div class="row">
 									<div class="col-lg-6">
-                                    <form role="form">
+                                    <form role="form" method="post" action="setting">
+                                        <input type="hidden" name="id" value="${setting.id}"/>
                                         <div class="form-group">
                                             <label style="color:grey">博客标题</label>
-                                            <input class="form-control">
+                                            <input class="form-control" type="text" name="title" value="${setting.title}">
                                         </div>
 										<div class="form-group">
                                             <label style="color:grey">博客描述</label>
-                                            <input class="form-control">
+                                            <input class="form-control" type="text" name="description" value="${setting.description}">
                                         </div>
 										<div class="form-group">
                                             <label style="color:grey">每页显示文章数</label>
-                                            <select class="form-control">
-                                                <option>5</option>
-                                                <option>10</option>
-                                                <option>15</option>
-                                                <option>20</option>
+                                            <select class="form-control" id="pageCount" name="pageCount" >
+                                                <option value="5">5</option>
+                                                <option value="10">10</option>
+                                                <option value="15">15</option>
+                                                <option value="20">20</option>
                                             </select>
                                         </div>
 										<button type="submit" class="btn btn-primary">保存配置</button>
-
+                                        <p style="color: red;">${msg}</p>
 									</form>
 									</div>
 								</div>
@@ -326,4 +328,10 @@
     
    
 </body>
+
+<script type="text/javascript">
+    var pageCount = document.getElementById("pageCount");
+    pageCount.value = ${setting.pageCount};
+</script>
+
 </html>
