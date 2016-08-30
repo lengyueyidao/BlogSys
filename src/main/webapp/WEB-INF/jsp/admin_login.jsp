@@ -26,6 +26,9 @@
     <p class="login-submit">
       <button type="submit" class="login-button">Login</button>
     </p>
+    <p>
+      ${error}
+    </p>
   </form>
 </body>
 </html>
